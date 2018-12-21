@@ -1,19 +1,9 @@
 package com.beemob.becaslt.demotest;
 
-import brave.Tracing;
-import brave.opentracing.BraveTracer;
-import brave.sampler.Sampler;
-import com.uber.jaeger.Configuration;
-import com.uber.jaeger.samplers.ProbabilisticSampler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import zipkin.Span;
-import zipkin.reporter.AsyncReporter;
-import zipkin.reporter.Encoding;
-import zipkin.reporter.okhttp3.OkHttpSender;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -26,27 +16,27 @@ public class DemoApplication {
 		logger.error("Start Error DemoApplication");
 	}
 
-	public io.opentracing.Tracer jaegerTracer() {
-		return new Configuration("DemoApplication", new Configuration.SamplerConfiguration(ProbabilisticSampler.TYPE, 1),
-				new Configuration.ReporterConfiguration())
-				.getTracer();
-	}
-
-	@Bean
-	public io.opentracing.Tracer zipkinTracer() {
-		OkHttpSender okHttpSender = OkHttpSender.builder()
-				.encoding(Encoding.JSON)
-				.endpoint("http://localhost:9411/api/v1/spans")
-				.build();
-		AsyncReporter<Span> reporter = AsyncReporter.builder(okHttpSender).build();
-		Tracing braveTracer = Tracing.newBuilder()
-				.localServiceName("DemoApplication")
-				.reporter(reporter)
-				.traceId128Bit(true)
-				.sampler(Sampler.ALWAYS_SAMPLE)
-				.build();
-		return BraveTracer.create(braveTracer);
-	}
+//	public io.opentracing.Tracer jaegerTracer() {
+//		return new Configuration("DemoApplication", new Configuration.SamplerConfiguration(ProbabilisticSampler.TYPE, 1),
+//				new Configuration.ReporterConfiguration())
+//				.getTracer();
+//	}
+//
+//	@Bean
+//	public io.opentracing.Tracer zipkinTracer() {
+//		OkHttpSender okHttpSender = OkHttpSender.builder()
+//				.encoding(Encoding.JSON)
+//				.endpoint("http://localhost:9411/api/v1/spans")
+//				.build();
+//		AsyncReporter<Span> reporter = AsyncReporter.builder(okHttpSender).build();
+//		Tracing braveTracer = Tracing.newBuilder()
+//				.localServiceName("DemoApplication")
+//				.reporter(reporter)
+//				.traceId128Bit(true)
+//				.sampler(Sampler.ALWAYS_SAMPLE)
+//				.build();
+//		return BraveTracer.create(braveTracer);
+//	}
 
 }
 
