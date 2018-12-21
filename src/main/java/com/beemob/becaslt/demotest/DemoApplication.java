@@ -1,12 +1,9 @@
 package com.beemob.becaslt.demotest;
 
-import com.uber.jaeger.Configuration;
-import com.uber.jaeger.samplers.ProbabilisticSampler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -32,12 +29,7 @@ public class DemoApplication {
 //	}
 
 
-	@Bean
-	public io.opentracing.Tracer jaegerTracer() {
-		return new Configuration("DemoApplication", new Configuration.SamplerConfiguration(ProbabilisticSampler.TYPE, 1),
-				new Configuration.ReporterConfiguration())
-				.getTracer();
-	}
+
 //
 //	@Bean
 //	public io.opentracing.Tracer zipkinTracer() {
