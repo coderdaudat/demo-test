@@ -1,9 +1,12 @@
 package com.beemob.becaslt.demotest;
 
+import com.uber.jaeger.Configuration;
+import com.uber.jaeger.samplers.ProbabilisticSampler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -16,11 +19,25 @@ public class DemoApplication {
 		logger.error("Start Error DemoApplication");
 	}
 
+
+//	@Bean
 //	public io.opentracing.Tracer jaegerTracer() {
-//		return new Configuration("DemoApplication", new Configuration.SamplerConfiguration(ProbabilisticSampler.TYPE, 1),
-//				new Configuration.ReporterConfiguration())
-//				.getTracer();
+//		Builder builder = new Builder("spring-boot",
+//				new RemoteReporter(new HttpSender("http://jaeger-collector.istio-system:14268/api/traces"), 10,
+//						65000, new Metrics(new StatsFactoryImpl(new NullStatsReporter()))),
+//				new ConstSampler(true))
+//				.registerInjector(Builtin.HTTP_HEADERS, new B3TextMapCodec())
+//				.registerExtractor(Builtin.HTTP_HEADERS, new B3TextMapCodec());
+//		return builder.build();
 //	}
+
+
+	@Bean
+	public io.opentracing.Tracer jaegerTracer() {
+		return new Configuration("DemoApplication", new Configuration.SamplerConfiguration(ProbabilisticSampler.TYPE, 1),
+				new Configuration.ReporterConfiguration())
+				.getTracer();
+	}
 //
 //	@Bean
 //	public io.opentracing.Tracer zipkinTracer() {
