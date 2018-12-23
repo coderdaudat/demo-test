@@ -14,6 +14,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 		logger.info("Start DemoApplication");
 		logger.error("Start Error DemoApplication");
+
 	}
 
 
