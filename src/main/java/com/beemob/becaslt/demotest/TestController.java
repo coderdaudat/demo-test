@@ -20,7 +20,7 @@ public class TestController {
 //    @Autowired
 //    private io.opentracing.Tracer tracer;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/test", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<?> createUser(@RequestParam("name") String userDto) {
         logger.info("NAME: " + userDto);
 //        tracer.activeSpan().setBaggageItem("transaction", "buy");
