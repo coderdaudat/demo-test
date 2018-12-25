@@ -141,6 +141,7 @@
         <feign.version>9.4.0</feign.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <sleuth.version>2.0.2.RELEASE</sleuth.version>
+        <spring-cloud-gcp.version>1.0.0.RELEASE</spring-cloud-gcp.version>
     </properties>
 
     <dependencyManagement>
